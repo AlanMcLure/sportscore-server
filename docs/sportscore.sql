@@ -297,4 +297,38 @@ VALUES
     ('Aitor', 'Ruibal', NULL, 'España', 'Delantero', '1996-03-22', 'aitor24', 'aitor@betis.com', 'contraseña', 7),
     ('Alioune', 'Diao', NULL, 'España', 'Delantero', '2005-09-07', 'alioune38', 'alioune@betis.com', 'contraseña', 7);
 
+-- Insertar jugadores en el Sevilla FC (desactualizada)
+INSERT INTO Jugador (nombre, apellido1, apellido2, nacionalidad, posicion, fechaNacimiento, username, correo, password, equipo_id)
+VALUES
+    ('Yassine', 'Bounou', NULL, 'Marruecos', 'Portero', '1991-04-05', 'yassine1', 'yassine@sevilla.com', 'contraseña', 8),
+    ('Tomas', 'Vaclik', NULL, 'República Checa', 'Portero', '1989-03-29', 'tomas13', 'tomas@sevilla.com', 'contraseña', 8),
+    ('Javi', 'Díaz', NULL, 'España', 'Portero', '1996-10-03', 'javi30', 'javi@sevilla.com', 'contraseña', 8),
+    ('Alfonso', 'Pastor', NULL, 'España', 'Portero', '2001-03-04', 'alfonso32', 'alfonso@sevilla.com', 'contraseña', 8),
+    ('Luca', 'Moreno', NULL, 'España', 'Portero', '2004-02-11', 'luca37', 'luca@sevilla.com', 'contraseña', 8),
+
+    ('Jesús', 'Navas', NULL, NULL, 'Defensa', '1985-11-21', 'jesus16', 'jesus@sevilla.com', 'contraseña', 8),
+    ('Diego', 'Carlos', NULL, NULL, 'Defensa', '1993-03-15', 'diego20', 'diego@sevilla.com', 'contraseña', 8),
+    ('Sergi', 'Gómez', NULL, NULL, 'Defensa', '1992-03-28', 'sergi3', 'sergi@sevilla.com', 'contraseña', 8),
+    ('Karim', 'Rekik', NULL, 'Países Bajos', 'Defensa', '1995-12-02', 'karim4', 'karim@sevilla.com', 'contraseña', 8),
+    ('Nemanja', 'Gudelj', NULL, 'Serbia', 'Defensa', '1991-11-16', 'nemanja5', 'nemanja@sevilla.com', 'contraseña', 8),
+    ('Pablo', 'Pérez', NULL, 'España', 'Defensa', '2000-07-16', 'pablo22', 'pablo@sevilla.com', 'contraseña', 8),
+    ('Jesús', 'Paredes', NULL, 'España', 'Defensa', '2003-05-11', 'jesus24', 'jesus@sevilla.com', 'contraseña', 8),
+    ('José Antonio', 'Caro', NULL, 'España', 'Defensa', '1993-03-12', 'jose30', 'jose@sevilla.com', 'contraseña', 8),
+
+    ('Ivan', 'Rakitić', NULL, 'Croacia', 'Centrocampista', '1988-03-10', 'ivan7', 'ivan@sevilla.com', 'contraseña', 8),
+    ('Joan', 'Jordán', NULL, 'España', 'Centrocampista', '1994-07-06', 'joan8', 'joan@sevilla.com', 'contraseña', 8),
+    ('Nabil', 'Fekir', NULL, 'Francia', 'Centrocampista', '1993-07-18', 'nabil9', 'nabil@sevilla.com', 'contraseña', 8),
+    ('Óliver', 'Torres', NULL, 'España', 'Centrocampista', '1994-11-10', 'oliver10', 'oliver@sevilla.com', 'contraseña', 8),
+    ('Fran', 'Beltrán', NULL, 'España', 'Centrocampista', '1999-02-03', 'fran11', 'fran@sevilla.com', 'contraseña', 8),
+    ('Mikkel', 'Hansen', NULL, 'Dinamarca', 'Centrocampista', '1996-08-22', 'mikkel12', 'mikkel@sevilla.com', 'contraseña', 8),
+    ('Antonio', 'García', NULL, 'España', 'Centrocampista', '2002-03-06', 'antonio13', 'antonio@sevilla.com', 'contraseña', 8),
+    ('Alberto', 'Torres', NULL, 'España', 'Centrocampista', '2001-04-15', 'alberto15', 'alberto@sevilla.com', 'contraseña', 8),
+
+    ('Rafa', 'Mir', 'España', NULL, 'Delantero', '1997-12-18', 'rafa7', 'rafa@sevilla.com', 'contraseña', 8),
+    ('Youssef', 'En-Nesyri', NULL, 'Marruecos', 'Delantero', '1997-06-01', 'youssef9', 'youssef@sevilla.com', 'contraseña', 8),
+    ('Lucas', 'Ocampos', 'Argentina', NULL, 'Delantero', '1994-07-11', 'lucas11', 'lucas@sevilla.com', 'contraseña', 8),
+    ('Munir', 'El Haddadi', NULL, 'España', 'Delantero', '1995-09-01', 'munir13', 'munir@sevilla.com', 'contraseña', 8),
+    ('Antoine', 'Griezmann', NULL, 'Francia', 'Delantero', '1991-03-21', 'antoine14', 'antoine@sevilla.com', 'contraseña', 8),
+    ('Fran', 'Rivero', NULL, 'España', 'Delantero', '2004-02-05', 'fran15', 'fran@sevilla.com', 'contraseña', 8),
+    ('Dany', 'Rodríguez', NULL, 'España', 'Delantero', '2005-02-10', 'dany16', 'dany@sevilla.com', 'contraseña', 8);
     
