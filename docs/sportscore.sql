@@ -26,18 +26,18 @@ CREATE TABLE jugador (
     email VARCHAR(255) NOT NULL,
     username VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    rol tinyint(1) NOT NULL,
-    equipo_id INT,
+    rol tinyint(1),
+    equipoId INT,
     FOREIGN KEY (equipo_id) REFERENCES Equipo(id)
 );
 
 -- Crear la tabla Partido
 CREATE TABLE partido (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    equipoLocal INT,
-    equipoVisitante INT,
-    fechaPartido DATE,
-    resultado VARCHAR(255),
+    equipoLocal INT NOT NULL,
+    equipoVisitante INT NOT NULL,
+    fechaPartido DATE NOT NULL,
+    resultado VARCHAR(255) NOT NULL,
     FOREIGN KEY (equipoLocal) REFERENCES Equipo(id),
     FOREIGN KEY (equipoVisitante) REFERENCES Equipo(id)
 );
