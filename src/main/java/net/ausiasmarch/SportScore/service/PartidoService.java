@@ -7,34 +7,30 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import jakarta.servlet.http.HttpServletRequest;
+import net.ausiasmarch.SportScore.entity.PartidoEntity;
 import net.ausiasmarch.SportScore.entity.EquipoEntity;
-import net.ausiasmarch.SportScore.entity.JugadorEntity;
 import net.ausiasmarch.SportScore.exception.ResourceNotFoundException;
 //import net.ausiasmarch.SportScore.helper.DataGenerationHelper;
 import net.ausiasmarch.SportScore.repository.EquipoRepository;
 import net.ausiasmarch.SportScore.repository.JugadorRepository;
+import net.ausiasmarch.SportScore.repository.PartidoRepository;
 
-@Service
-public class EquipoService {
+public class PartidoService {
 
     @Autowired
-    EquipoRepository oEquipoRepository;
+    PartidoRepository oPartidoRepository;
 
     @Autowired
     HttpServletRequest oHttpServletRequest;
 
     @Autowired
-    JugadorRepository oJugadorRepository;
+    EquipoRepository oEquipoRepository;
 
-    @Autowired
-    JugadorService oJugadorService;
-
-    public EquipoEntity get(Long id) {
-        return oEquipoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Equipo not found"));
+    public PartidoEntity get(Long id) {
+        return oPartidoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Partido not found"));
     }
 
-    public Page<EquipoEntity> getPage(Pageable oPageable) {
-        return oEquipoRepository.findAll(oPageable);
+    public Page<PartidoEntity> getPage(Pageable oPageable) {
+        return oPartidoRepository.findAll(oPageable);
     }
-
 }

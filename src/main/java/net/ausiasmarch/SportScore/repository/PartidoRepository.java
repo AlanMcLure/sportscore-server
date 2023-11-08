@@ -4,13 +4,13 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import net.ausiasmarch.SportScore.entity.EquipoEntity;
+import net.ausiasmarch.SportScore.entity.PartidoEntity;
 
-public interface EquipoRepository extends JpaRepository<EquipoEntity, Long> {
+public interface PartidoRepository extends JpaRepository<PartidoEntity, Long> {
 
-    Optional<EquipoEntity> findByNombre(String nombre);
+    Optional<PartidoEntity> findByNombre(String nombre);
 
     @Modifying
-    @Query(value = "ALTER TABLE equipo AUTO_INCREMENT = 1", nativeQuery = true)
+    @Query(value = "ALTER TABLE partido AUTO_INCREMENT = 1", nativeQuery = true)
     void resetAutoIncrement();
 }
