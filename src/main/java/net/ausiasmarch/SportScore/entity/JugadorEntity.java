@@ -47,6 +47,8 @@ public class JugadorEntity {
     @NotBlank
     private Date fechaNacimiento;
 
+    @NotNull
+    @NotBlank
     @Email
     private String email;
 
@@ -66,7 +68,7 @@ public class JugadorEntity {
     private Boolean role = false;
 
     @ManyToOne
-    @JoinColumn(name = "equipo_id")
+    @JoinColumn(name = "equipoId", referencedColumnName = "id")
     private EquipoEntity equipo;
     /*
     @OneToMany(mappedBy = "jugador", fetch = jakarta.persistence.FetchType.LAZY)
