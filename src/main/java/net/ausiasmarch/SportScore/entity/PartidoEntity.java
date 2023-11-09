@@ -1,6 +1,6 @@
 package net.ausiasmarch.SportScore.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,7 +23,7 @@ public class PartidoEntity {
 
     @NotNull
     @NotBlank
-    private Date fechaPartido;
+    private LocalDate fechaPartido;
 
     @NotNull
     @NotBlank
@@ -39,7 +39,7 @@ public class PartidoEntity {
     @JoinColumn(name = "equipoVisitante", referencedColumnName = "id")
     private EquipoEntity equipoVisitante;
 
-    public PartidoEntity(Long id, Date fechaPartido, String resultado, EquipoEntity equipoLocal, EquipoEntity equipoVisitante) {
+    public PartidoEntity(Long id, LocalDate fechaPartido, String resultado, EquipoEntity equipoLocal, EquipoEntity equipoVisitante) {
         this.id = id;
         this.fechaPartido = fechaPartido;
         this.resultado = resultado;
@@ -47,7 +47,7 @@ public class PartidoEntity {
         this.equipoVisitante = equipoVisitante;
     }
 
-    public PartidoEntity(Date fechaPartido, String resultado, EquipoEntity equipoLocal, EquipoEntity equipoVisitante) {
+    public PartidoEntity(LocalDate fechaPartido, String resultado, EquipoEntity equipoLocal, EquipoEntity equipoVisitante) {
         this.fechaPartido = fechaPartido;
         this.resultado = resultado;
         this.equipoLocal = equipoLocal;
@@ -62,11 +62,11 @@ public class PartidoEntity {
         this.id = id;
     }
 
-    public Date getfechaPartido() {
+    public LocalDate getfechaPartido() {
         return fechaPartido;
     }
 
-    public void setfechaPartido(Date fechaPartido) {
+    public void setfechaPartido(LocalDate fechaPartido) {
         this.fechaPartido = fechaPartido;
     }
 

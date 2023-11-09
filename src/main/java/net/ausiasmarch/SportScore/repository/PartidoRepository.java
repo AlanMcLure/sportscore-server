@@ -8,8 +8,6 @@ import net.ausiasmarch.SportScore.entity.PartidoEntity;
 
 public interface PartidoRepository extends JpaRepository<PartidoEntity, Long> {
 
-    Optional<PartidoEntity> findByNombre(String nombre);
-
     @Modifying
     @Query(value = "ALTER TABLE partido AUTO_INCREMENT = 1", nativeQuery = true)
     void resetAutoIncrement();
