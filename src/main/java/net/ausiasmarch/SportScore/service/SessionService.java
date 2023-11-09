@@ -87,7 +87,7 @@ public class SessionService {
         }
     }
 
-    public void onlyJugadoresWithIisOwnData(Long jugadorId) {
+    public void onlyUsersWithIisOwnData(Long jugadorId) {
         if (!this.isUser()) {
             throw new UnauthorizedException("Sólo los jugadores pueden hacer esto");
         }
@@ -96,14 +96,14 @@ public class SessionService {
         }
     }
 
-    public void onlyAdminsOrJugadoresWithIisOwnData(Long jugadorId) {
+    public void onlyAdminsOrUsersWithIsOwnData(Long jugadorId) {
         if (this.isSessionActive()) {
             if (!this.isAdmin()) {
                 if (!this.isUser()) {
                     throw new UnauthorizedException("Sólo los administradores pueden hacer esto");
                 } else {
                     if (!this.getSessionUser().getId().equals(jugadorId)) {
-                        throw new UnauthorizedException("Only admins or users with its own data can do this");
+                        throw new UnauthorizedException("Sólo los administradores o jugadores con sus mismos datos pueden hacer esto");
                     }
                 }
             }

@@ -28,7 +28,7 @@ CREATE TABLE jugador (
     password VARCHAR(255) NOT NULL,
     rol tinyint(1),
     equipoId INT,
-    FOREIGN KEY (equipo_id) REFERENCES Equipo(id)
+    FOREIGN KEY (equipoId) REFERENCES equipo(id)
 );
 
 -- Crear la tabla Partido
@@ -38,8 +38,8 @@ CREATE TABLE partido (
     equipoVisitante INT NOT NULL,
     fechaPartido DATE NOT NULL,
     resultado VARCHAR(255) NOT NULL,
-    FOREIGN KEY (equipoLocal) REFERENCES Equipo(id),
-    FOREIGN KEY (equipoVisitante) REFERENCES Equipo(id)
+    FOREIGN KEY (equipoLocal) REFERENCES equipo(id),
+    FOREIGN KEY (equipoVisitante) REFERENCES equipo(id)
 );
 
 -- Inserts Equipos
@@ -76,7 +76,7 @@ INSERT INTO equipo (nombre, paisOrigen, ciudadOrigen, fechaFundacion, entrenador
 VALUES ('Sevilla FC', 'España', 'Sevilla', '1905-01-25', 'Diego Alonso');
 
 -- Insertar jugadores en el FC Barcelona
-INSERT INTO jugador (nombre, apellido1, apellido2, nacionalidad, posicion, fechaNacimiento, username, correo, password, equipo_id)
+INSERT INTO jugador (nombre, apellido1, apellido2, nacionalidad, posicion, fechaNacimiento, username, email, password, equipoId)
 VALUES
     ('Robert', 'Lewandowski', NULL, 'Polonia', 'Delantero', '1988-08-21', 'lewandowski9', 'robert@barca.com', 'contraseña', 1),
     ('Joao', 'Felix', NULL, 'Portugal', 'Delantero', '1999-11-10', 'joaofelix7', 'joao@barca.com', 'contraseña', 1),
@@ -101,7 +101,7 @@ VALUES
     ('Marc', 'Guiu', NULL, 'España', 'Delantero', '2004-01-04', 'marc9', 'marc@barca.com', 'contraseña', 1);
 
 -- Insertar jugadores en el Real Madrid
-INSERT INTO jugador (nombre, apellido1, apellido2, nacionalidad, posicion, fechaNacimiento, username, correo, password, equipo_id)
+INSERT INTO jugador (nombre, apellido1, apellido2, nacionalidad, posicion, fechaNacimiento, username, email, password, equipoId)
 VALUES
     ('Thibaut', 'Courtois', NULL, 'Bélgica', 'Portero', '1992-05-11', 'courtois1', 'thibaut@madrid.com', 'contraseña', 2),
     ('Andriy', 'Lunin', NULL, 'Ucrania', 'Portero', '1999-02-11', 'lunin13', 'andriy@madrid.com', 'contraseña', 2),
@@ -136,7 +136,7 @@ VALUES
     ('Lucas', 'Vázquez', NULL, 'España', 'Delantero', '1991-07-01', 'lucas17', 'lucas@madrid.com', 'contraseña', 2);
 
     -- Insertar jugadores en el Atlético de Madrid
-INSERT INTO jugador (nombre, apellido1, apellido2, nacionalidad, posicion, fechaNacimiento, username, correo, password, equipo_id)
+INSERT INTO jugador (nombre, apellido1, apellido2, nacionalidad, posicion, fechaNacimiento, username, email, password, equipoId)
 VALUES
     ('Ivo', 'Grbić', NULL, 'Croacia', 'Portero', '1996-01-18', 'ivo1', 'ivo@atletico.com', 'contraseña', 3),
     ('Jan', 'Oblak', NULL, 'Eslovenia', 'Portero', '1993-01-07', 'jan13', 'jan@atletico.com', 'contraseña', 3),
@@ -171,7 +171,7 @@ VALUES
     ('Iván', 'Niño', NULL, 'España', 'Delantero', '2004-06-19', 'ivan32', 'ivan@atletico.com', 'contraseña', 3);
 
 -- Insertar jugadores en el Athletic Club
-INSERT INTO jugador (nombre, apellido1, apellido2, nacionalidad, posicion, fechaNacimiento, username, correo, password, equipo_id)
+INSERT INTO jugador (nombre, apellido1, apellido2, nacionalidad, posicion, fechaNacimiento, username, email, password, equipoId)
 VALUES
     ('Unai', 'Simón', NULL, 'España', 'Portero', '1997-06-11', 'unai1', 'unai@athletic.com', 'contraseña', 4),
     ('Iago', 'Herrerín', NULL, 'España', 'Portero', '1988-01-25', 'iago13', 'iago@athletic.com', 'contraseña', 4),
@@ -204,7 +204,7 @@ VALUES
     ('Unai', 'Nuñez', NULL, 'España', 'Delantero', '2003-09-10', 'unai15', 'unai@athletic.com', 'contraseña', 4);
 
     -- Insertar jugadores en el Valencia CF
-INSERT INTO jugador (nombre, apellido1, apellido2, nacionalidad, posicion, fechaNacimiento, username, correo, password, equipo_id)
+INSERT INTO jugador (nombre, apellido1, apellido2, nacionalidad, posicion, fechaNacimiento, username, email, password, equipoId)
 VALUES
     ('Jaume', 'Doménech', NULL, 'España', 'Portero', '1990-11-05', 'jaume1', 'jaume@valenciacf.com', 'contraseña', 5),
     ('Cristian', 'Rivero', NULL, 'España', 'Portero', '1998-03-21', 'cristian13', 'cristian@valenciacf.com', 'contraseña', 5),
@@ -239,7 +239,7 @@ VALUES
     ('Mario', 'Díaz', NULL, 'España', 'Delantero', '2004-02-10', 'mario36', 'mario@valenciacf.com', 'contraseña', 5);
 
     -- Insertar jugadores en la Real Sociedad
-INSERT INTO jugador (nombre, apellido1, apellido2, nacionalidad, posicion, fechaNacimiento, username, correo, password, equipo_id)
+INSERT INTO jugador (nombre, apellido1, apellido2, nacionalidad, posicion, fechaNacimiento, username, email, password, equipoId)
 VALUES
     ('Álex', 'Remiro', NULL, 'España', 'Portero', '1995-03-24', 'alex1', 'alex@realsociedad.com', 'contraseña', 6),
 
@@ -265,7 +265,7 @@ VALUES
     ('André', 'Silva', NULL, 'Portugal', 'Delantero', '1995-11-06', 'andre21', 'andre@realsociedad.com', 'contraseña', 6);
 
     -- Insertar jugadores en el Betis
-INSERT INTO jugador (nombre, apellido1, apellido2, nacionalidad, posicion, fechaNacimiento, username, correo, password, equipo_id)
+INSERT INTO jugador (nombre, apellido1, apellido2, nacionalidad, posicion, fechaNacimiento, username, email, password, equipoId)
 VALUES
     ('Claudio', 'Bravo', NULL, 'Chile', 'Portero', '1983-04-13', 'claudio1', 'claudio@betis.com', 'contraseña', 7),
     ('Rui', 'Silva', NULL, 'Portugal', 'Portero', '1994-02-07', 'rui13', 'rui@betis.com', 'contraseña', 7),
@@ -296,10 +296,10 @@ VALUES
     ('Ayoze', 'Pérez', NULL, 'España', 'Delantero', '1993-07-29', 'ayoze10', 'ayoze@betis.com', 'contraseña', 7),
     ('Willian', 'José', NULL, 'Brasil', 'Delantero', '1991-11-23', 'willian12', 'willian@betis.com', 'contraseña', 7),
     ('Aitor', 'Ruibal', NULL, 'España', 'Delantero', '1996-03-22', 'aitor24', 'aitor@betis.com', 'contraseña', 7),
-    ('Alioune', 'Diao', NULL, 'España', 'Delantero', '2005-09-07', 'alioune38', 'alioune@betis.com', 'contraseña', 7);
+    ('Alioune', 'Diao', NULL, 'España_i', 'Delantero', '2005-09-07', 'alioune38', 'alioune@betis.com', 'contraseña', 7);
 
 -- Insertar jugadores en el Sevilla FC (desactualizada)
-INSERT INTO jugador (nombre, apellido1, apellido2, nacionalidad, posicion, fechaNacimiento, username, correo, password, equipo_id)
+INSERT INTO jugador (nombre, apellido1, apellido2, nacionalidad, posicion, fechaNacimiento, username, email, password, equipoId)
 VALUES
     ('Yassine', 'Bounou', NULL, 'Marruecos', 'Portero', '1991-04-05', 'yassine1', 'yassine@sevilla.com', 'contraseña', 8),
     ('Tomas', 'Vaclik', NULL, 'República Checa', 'Portero', '1989-03-29', 'tomas13', 'tomas@sevilla.com', 'contraseña', 8),
