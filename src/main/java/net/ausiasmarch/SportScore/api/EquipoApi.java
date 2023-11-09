@@ -15,26 +15,51 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.servlet.http.HttpServletRequest;
 import net.ausiasmarch.SportScore.entity.EquipoEntity;
-import net.ausiasmarch.SportScore.repository.EquipoRepository;
 import net.ausiasmarch.SportScore.service.EquipoService;
-import net.ausiasmarch.SportScore.service.SessionService;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/equipo")
 public class EquipoApi {
-    
-    @Autowired
-    EquipoRepository oEquipoRepository;
-        
-    @Autowired
-    HttpServletRequest oHttpServletRequest;
      
     @Autowired
     EquipoService oEquipoService;
-   
-    @Autowired
-    SessionService oSessionService;
+
+
+    @GetMapping("/{id}")
+    public ResponseEntity<EquipoEntity> get(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(oEquipoService.get(id));
+    }
+
+    @PostMapping("")
+    public ResponseEntity<Long> create(@RequestBody EquipoEntity oEquipoEntity) {
+        return ResponseEntity.ok(oEquipoService.create(oEquipoEntity));
+    }
+
+    @PutMapping("")
+    public ResponseEntity<EquipoEntity> update(@RequestBody EquipoEntity oEquipoEntity) {
+        return ResponseEntity.ok(oEquipoService.update(oEquipoEntity));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Long> delete(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(oEquipoService.delete(id));
+    }
+
+    @GetMapping("")
+    public ResponseEntity<Page<EquipoEntity>> getPage(Pageable oPageable) {
+        return ResponseEntity.ok(oEquipoService.getPage(oPageable));
+    }
+
+    @PostMapping("/populate/{amount}")
+    public ResponseEntity<Long> populate(@PathVariable("amount") Integer amount) {
+        return ResponseEntity.ok(oEquipoService.populate(amount));
+    }
+
+    @DeleteMapping("/empty")
+    public ResponseEntity<Long> empty() {
+        return ResponseEntity.ok(oEquipoService.empty());
+    }
+
 }

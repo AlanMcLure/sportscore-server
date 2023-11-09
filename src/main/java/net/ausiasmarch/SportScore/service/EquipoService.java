@@ -12,7 +12,6 @@ import net.ausiasmarch.SportScore.entity.JugadorEntity;
 import net.ausiasmarch.SportScore.exception.ResourceNotFoundException;
 //import net.ausiasmarch.SportScore.helper.DataGenerationHelper;
 import net.ausiasmarch.SportScore.repository.EquipoRepository;
-import net.ausiasmarch.SportScore.repository.JugadorRepository;
 
 @Service
 public class EquipoService {
@@ -24,10 +23,7 @@ public class EquipoService {
     HttpServletRequest oHttpServletRequest;
 
     @Autowired
-    JugadorRepository oJugadorRepository;
-
-    @Autowired
-    JugadorService oJugadorService;
+    SessionService oSessionService;
 
     public EquipoEntity get(Long id) {
         return oEquipoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Equipo not found"));
@@ -37,4 +33,62 @@ public class EquipoService {
         return oEquipoRepository.findAll(oPageable);
     }
 
+    @Transactional
+    public Long create(EquipoEntity oEquipoEntity) {
+        oSessionService.onlyAdmins();
+        oEquipoEntity.setId(null);
+        return oEquipoRepository.save(oEquipoEntity).getId();
+    }
+
+    @Transactional
+    public EquipoEntity update(EquipoEntity oEquipoEntityToSet) {
+        EquipoEntity oEquipoEntityFromDatabase = this.get(oEquipoEntityToSet.getId());
+        oSessionService.onlyAdminsOrUsersWithIsOwnData(oEquipoEntityFromDatabase.getId());
+        if (oSessionService.isUser()) {
+            JugadorEntity oJugadorEntity = oSessionService.getSessionUser();
+            if (oJugadorEntity.getEquipo() != null && oJugadorEntity.getEquipo().getId().equals(oEquipoEntityToSet.getId())) {
+                return oEquipoRepository.save(oEquipoEntityToSet);
+            } else {
+                throw new ResourceNotFoundException("Unauthorized");
+            }
+        } else {
+            return oEquipoRepository.save(oEquipoEntityToSet);
+        }
+    }
+
+    @Transactional
+    public Long delete(Long id) {
+        oSessionService.onlyAdmins();
+        oEquipoRepository.deleteById(id);
+        return id;
+    }
+
+    public EquipoEntity getOneRandom() {
+        oSessionService.onlyAdmins();
+        Pageable oPageable = PageRequest.of((int) (Math.random() * oEquipoRepository.count()), 1);
+        return oEquipoRepository.findAll(oPageable).getContent().get(0);
+    }
+
+    // Falta hacer esta función bien con el DataGenerator
+    @Transactional
+    public Long populate(Integer amount) {
+        oSessionService.onlyAdmins();
+        for (int i = 0; i < amount; i++) {
+            String nombre = "";
+            String paisOrigen = "";
+            String ciudadOrigen = "";
+            String fechaFundacion = "";
+            String entrenador = "";
+        }
+        return oEquipoRepository.count();
+    }
+
+    @Transactional
+    public Long empty() {
+        oSessionService.onlyAdmins();
+        oEquipoRepository.deleteAll();
+        oEquipoRepository.resetAutoIncrement();
+        oEquipoRepository.flush();
+        return oEquipoRepository.count();
+    }
 }

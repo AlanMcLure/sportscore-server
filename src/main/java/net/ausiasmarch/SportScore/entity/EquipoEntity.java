@@ -1,7 +1,8 @@
 package net.ausiasmarch.SportScore.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,24 +21,35 @@ public class EquipoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /*
     @NotNull
     @NotBlank
+    */
     @Size(min=3, max=255)
     private String nombre;
 
+    /*
     @NotNull
     @NotBlank
+    */
     private String paisOrigen;
 
+    @Column(name = "ciudad_origen")
     private String ciudadOrigen;
 
+    /*
     @NotNull
     @NotBlank
-    private Date fechaFundacion;
+    */
+    private LocalDate fechaFundacion;
 
     private String entrenador;
 
-    public EquipoEntity(Long id, String nombre, String paisOrigen, String ciudadOrigen, Date fechaFundacion, String entrenador) {
+    public EquipoEntity() {
+        // Constructor sin argumentos
+    }
+
+    public EquipoEntity(Long id, String nombre, String paisOrigen, String ciudadOrigen, LocalDate fechaFundacion, String entrenador) {
         this.id = id;
         this.nombre = nombre;
         this.paisOrigen = paisOrigen;
@@ -46,7 +58,7 @@ public class EquipoEntity {
         this.entrenador = entrenador;
     }
 
-    public EquipoEntity(String nombre, String paisOrigen, String ciudadOrigen, Date fechaFundacion, String entrenador) {
+    public EquipoEntity(String nombre, String paisOrigen, String ciudadOrigen, LocalDate fechaFundacion, String entrenador) {
         this.nombre = nombre;
         this.paisOrigen = paisOrigen;
         this.ciudadOrigen = ciudadOrigen;
@@ -86,11 +98,11 @@ public class EquipoEntity {
         this.ciudadOrigen = ciudadOrigen;
     }
 
-    public Date getFechaFundacion() {
+    public LocalDate getFechaFundacion() {
         return fechaFundacion;
     }
 
-    public void setFechaFundacion(Date fechaFundacion) {
+    public void setFechaFundacion(LocalDate fechaFundacion) {
         this.fechaFundacion = fechaFundacion;
     }
 
