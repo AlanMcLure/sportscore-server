@@ -2,6 +2,7 @@ package net.ausiasmarch.SportScore.entity;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,23 +24,26 @@ public class PartidoEntity {
 
     @NotNull
     @NotBlank
+    @Column(name = "fecha_partido")
     private LocalDate fechaPartido;
 
     @NotNull
     @NotBlank
+    @Column(name = "resultado")
     private String resultado;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "equipoLocal", referencedColumnName = "id")
+    @JoinColumn(name = "equipo_local", referencedColumnName = "id")
     private EquipoEntity equipoLocal;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "equipoVisitante", referencedColumnName = "id")
+    @JoinColumn(name = "equipo_visitante", referencedColumnName = "id")
     private EquipoEntity equipoVisitante;
 
-    public PartidoEntity(Long id, LocalDate fechaPartido, String resultado, EquipoEntity equipoLocal, EquipoEntity equipoVisitante) {
+    public PartidoEntity(Long id, LocalDate fechaPartido, String resultado, EquipoEntity equipoLocal,
+            EquipoEntity equipoVisitante) {
         this.id = id;
         this.fechaPartido = fechaPartido;
         this.resultado = resultado;
@@ -47,7 +51,8 @@ public class PartidoEntity {
         this.equipoVisitante = equipoVisitante;
     }
 
-    public PartidoEntity(LocalDate fechaPartido, String resultado, EquipoEntity equipoLocal, EquipoEntity equipoVisitante) {
+    public PartidoEntity(LocalDate fechaPartido, String resultado, EquipoEntity equipoLocal,
+            EquipoEntity equipoVisitante) {
         this.fechaPartido = fechaPartido;
         this.resultado = resultado;
         this.equipoLocal = equipoLocal;

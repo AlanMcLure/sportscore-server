@@ -16,40 +16,48 @@ import jakarta.validation.constraints.Size;
 @Entity
 @Table(name = "equipo")
 public class EquipoEntity {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     /*
-    @NotNull
-    @NotBlank
-    */
-    @Size(min=3, max=255)
+     * @NotNull
+     * 
+     * @NotBlank
+     */
+    @Column(name = "nombre")
+    @Size(min = 3, max = 255)
     private String nombre;
 
     /*
-    @NotNull
-    @NotBlank
-    */
+     * @NotNull
+     * 
+     * @NotBlank
+     */
+    @Column(name = "pais_origen")
     private String paisOrigen;
 
     @Column(name = "ciudad_origen")
     private String ciudadOrigen;
 
     /*
-    @NotNull
-    @NotBlank
-    */
+     * @NotNull
+     * 
+     * @NotBlank
+     */
+    @Column(name = "fecha_fundacion")
     private LocalDate fechaFundacion;
 
+    @Column(name = "entrenador")
     private String entrenador;
 
     public EquipoEntity() {
         // Constructor sin argumentos
     }
 
-    public EquipoEntity(Long id, String nombre, String paisOrigen, String ciudadOrigen, LocalDate fechaFundacion, String entrenador) {
+    public EquipoEntity(Long id, String nombre, String paisOrigen, String ciudadOrigen, LocalDate fechaFundacion,
+            String entrenador) {
         this.id = id;
         this.nombre = nombre;
         this.paisOrigen = paisOrigen;
@@ -58,7 +66,8 @@ public class EquipoEntity {
         this.entrenador = entrenador;
     }
 
-    public EquipoEntity(String nombre, String paisOrigen, String ciudadOrigen, LocalDate fechaFundacion, String entrenador) {
+    public EquipoEntity(String nombre, String paisOrigen, String ciudadOrigen, LocalDate fechaFundacion,
+            String entrenador) {
         this.nombre = nombre;
         this.paisOrigen = paisOrigen;
         this.ciudadOrigen = ciudadOrigen;
@@ -114,5 +123,4 @@ public class EquipoEntity {
         this.entrenador = entrenador;
     }
 
-    
 }
