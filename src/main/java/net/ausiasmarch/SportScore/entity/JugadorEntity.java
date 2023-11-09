@@ -1,6 +1,6 @@
 package net.ausiasmarch.SportScore.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -45,7 +45,7 @@ public class JugadorEntity {
 
     @NotNull
     @NotBlank
-    private Date fechaNacimiento;
+    private LocalDate fechaNacimiento;
 
     @NotNull
     @NotBlank
@@ -75,7 +75,7 @@ public class JugadorEntity {
     private EquipoEntity equipo;
      */
 
-     public JugadorEntity(Long id, String nombre, String apellido1, String apellido2, String nacionalidad, String posicion, Date fechaNacimiento, String email, String username, String password, Boolean role, EquipoEntity equipo) {
+    public JugadorEntity(Long id, String nombre, String apellido1, String apellido2, String nacionalidad, String posicion, LocalDate fechaNacimiento, String email, String username, String password, Boolean role, EquipoEntity equipo) {
         this.id = id;
         this.nombre = nombre;
         this.apellido1 = apellido1;
@@ -90,7 +90,7 @@ public class JugadorEntity {
         this.equipo = equipo;
     }
 
-    public JugadorEntity(String nombre, String apellido1, String apellido2, String nacionalidad, String posicion, Date fechaNacimiento, String email, String username, String password, Boolean role, EquipoEntity equipo) {
+    public JugadorEntity(String nombre, String apellido1, String apellido2, String nacionalidad, String posicion, LocalDate fechaNacimiento, String email, String username, String password, Boolean role, EquipoEntity equipo) {
         this.nombre = nombre;
         this.apellido1 = apellido1;
         this.apellido2 = apellido2;
@@ -157,11 +157,11 @@ public class JugadorEntity {
         this.posicion = posicion;
     }
 
-    public Date getFechaNacimiento() {
+    public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
