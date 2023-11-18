@@ -22,7 +22,7 @@ import net.ausiasmarch.SportScore.service.PartidoService;
 @RestController
 @RequestMapping("/partido")
 public class PartidoApi {
-     
+
     @Autowired
     PartidoService oPartidoService;
 
@@ -47,8 +47,9 @@ public class PartidoApi {
     }
 
     @GetMapping("")
-    public ResponseEntity<Page<PartidoEntity>> getPage(Pageable oPageable, @RequestParam(value = "equipo", defaultValue = "0", required = false) Long equipoId) {
-        return ResponseEntity.ok(oPartidoService.getPage(oPageable));
+    public ResponseEntity<Page<PartidoEntity>> getPage(Pageable oPageable,
+            @RequestParam(value = "equipo", defaultValue = "0", required = false) Long equipoId) {
+        return ResponseEntity.ok(oPartidoService.getPage(oPageable, equipoId));
     }
 
     @PostMapping("/populate/{amount}")

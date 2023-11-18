@@ -27,7 +27,7 @@ public class PartidoService {
 
     @Autowired
     EquipoRepository oEquipoRepository;
-    
+
     @Autowired
     SessionService oSessionService;
 
@@ -35,8 +35,12 @@ public class PartidoService {
         return oPartidoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Partido not found"));
     }
 
-    public Page<PartidoEntity> getPage(Pageable oPageable) {
-        return oPartidoRepository.findAll(oPageable);
+    public Page<PartidoEntity> getPage(Pageable oPageable, Long equipoId) {
+        if (equipoId == 0) {
+            return oPartidoRepository.findAll(oPageable);
+        } else {
+            return oPartidoRepository.findByEquipoLocalIdOrEquipoVisitanteId(equipoId, equipoId, oPageable);
+        }
     }
 
     @Transactional
@@ -84,9 +88,10 @@ public class PartidoService {
         oSessionService.onlyAdmins();
         for (int i = 0; i < amount; i++) {
             /*
-            oPartidoRepository
-                    .save(new PartidoEntity(DataGenerationHelper.getSpeech(1), oUserService.getOneRandom()));
-            */
+             * oPartidoRepository
+             * .save(new PartidoEntity(DataGenerationHelper.getSpeech(1),
+             * oUserService.getOneRandom()));
+             */
         }
         return oPartidoRepository.count();
     }

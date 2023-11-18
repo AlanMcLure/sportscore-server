@@ -13,6 +13,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 
 @Entity
 @Table(name = "partido")
@@ -22,8 +23,8 @@ public class PartidoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @NotBlank
+    @NotNull(message = "La fecha del partido no puede ser nula")
+    @Past(message = "La fecha del partido debe estar en el pasado")
     @Column(name = "fecha_partido")
     private LocalDate fechaPartido;
 
@@ -41,6 +42,10 @@ public class PartidoEntity {
     @ManyToOne
     @JoinColumn(name = "equipo_visitante", referencedColumnName = "id")
     private EquipoEntity equipoVisitante;
+
+    public PartidoEntity() {
+        // Constructor vacío
+    }
 
     public PartidoEntity(Long id, LocalDate fechaPartido, String resultado, EquipoEntity equipoLocal,
             EquipoEntity equipoVisitante) {

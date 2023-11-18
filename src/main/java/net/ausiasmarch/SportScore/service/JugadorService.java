@@ -38,9 +38,14 @@ public class JugadorService {
         return oJugadorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Jugador not found"));
     }
 
-    public Page<JugadorEntity> getPage(Pageable oPageable) {
+    public Page<JugadorEntity> getPage(Pageable oPageable, Long equipoId) {
         oSessionService.onlyAdmins();
-        return oJugadorRepository.findAll(oPageable);
+        if (equipoId == 0) {
+            return oJugadorRepository.findAll(oPageable);
+        } else {
+            return oJugadorRepository.findByEquipoId(equipoId, oPageable);
+        }
+
     }
 
     @Transactional
@@ -84,13 +89,15 @@ public class JugadorService {
     @Transactional
     public Long populate(Integer amount) {
         oSessionService.onlyAdmins();
-        for (int i= 0; i < amount; i++) {
+        for (int i = 0; i < amount; i++) {
             String nombre = "";
             String apellido1 = "";
             String apellido2 = "";
+
             String nacionalidad = "";
             String posicion = "";
-            LocalDate fechaNacimiento = LocalDate.of(2002, 10, 16);;
+            LocalDate fechaNacimiento = LocalDate.of(2002, 10, 16);
+            ;
             String email = "";
             String password = "";
             String username = "";
@@ -99,19 +106,21 @@ public class JugadorService {
         }
         return oEquipoRepository.count();
     }
-    
+
     @Transactional
-    public Long empty() {       
+    public Long empty() {
         oSessionService.onlyAdmins();
         oJugadorRepository.deleteAll();
         oJugadorRepository.resetAutoIncrement();
-        
+
         LocalDate fechaNacimiento = LocalDate.of(2002, 10, 16);
-        EquipoEntity equipo = oEquipoRepository.findById(1L).orElseThrow(() -> new ResourceNotFoundException("Equipo not found"));
-            JugadorEntity oJugadorEntity1 = new JugadorEntity(1L, "Alan", "McLure", "Alarcón", "España", "Delantero", fechaNacimiento,
+        EquipoEntity equipo = oEquipoRepository.findById(1L)
+                .orElseThrow(() -> new ResourceNotFoundException("Equipo not found"));
+        JugadorEntity oJugadorEntity1 = new JugadorEntity(1L, "Alan", "McLure", "Alarcón", "España", "Delantero",
+                fechaNacimiento,
                 "pedropicapiedra@ausiasmarch.net", "pedropicapiedra", sportscorePASSWORD, true, equipo);
-        oJugadorRepository.save(oJugadorEntity1);        
+        oJugadorRepository.save(oJugadorEntity1);
         return oJugadorRepository.count();
     }
-           
+
 }

@@ -11,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -41,11 +42,8 @@ public class EquipoEntity {
     @Column(name = "ciudad_origen")
     private String ciudadOrigen;
 
-    /*
-     * @NotNull
-     * 
-     * @NotBlank
-     */
+    @NotNull(message = "La fecha de fundación no puede ser nula")
+    @Past(message = "La fecha de fundación debe estar en el pasado")
     @Column(name = "fecha_fundacion")
     private LocalDate fechaFundacion;
 

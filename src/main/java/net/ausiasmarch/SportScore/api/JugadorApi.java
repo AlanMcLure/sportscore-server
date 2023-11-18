@@ -22,7 +22,7 @@ import net.ausiasmarch.SportScore.service.JugadorService;
 @RestController
 @RequestMapping("/jugador")
 public class JugadorApi {
-    
+
     @Autowired
     JugadorService oJugadorService;
 
@@ -47,11 +47,11 @@ public class JugadorApi {
     }
 
     @GetMapping("")
-    public ResponseEntity<Page<JugadorEntity>> getPage(Pageable oPageable, @RequestParam(value = "equipo", defaultValue = "0", required = false) Long equipoId) {
-        return ResponseEntity.ok(oJugadorService.getPage(oPageable));
+    public ResponseEntity<Page<JugadorEntity>> getPage(Pageable oPageable,
+            @RequestParam(value = "equipo", defaultValue = "0", required = false) Long equipoId) {
+        return ResponseEntity.ok(oJugadorService.getPage(oPageable, equipoId));
     }
 
-    
     @PostMapping("/populate/{amount}")
     public ResponseEntity<Long> populate(@PathVariable("amount") Integer amount) {
         return ResponseEntity.ok(oJugadorService.populate(amount));
@@ -61,5 +61,5 @@ public class JugadorApi {
     public ResponseEntity<Long> empty() {
         return ResponseEntity.ok(oJugadorService.empty());
     }
-    
+
 }
