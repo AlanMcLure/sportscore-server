@@ -1,5 +1,9 @@
 package net.ausiasmarch.SportScore.service;
 
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
@@ -11,6 +15,7 @@ import net.ausiasmarch.SportScore.entity.PartidoEntity;
 import net.ausiasmarch.SportScore.entity.EquipoEntity;
 import net.ausiasmarch.SportScore.entity.JugadorEntity;
 import net.ausiasmarch.SportScore.exception.ResourceNotFoundException;
+import net.ausiasmarch.SportScore.helper.DataGenerationHelper;
 //import net.ausiasmarch.SportScore.helper.DataGenerationHelper;
 import net.ausiasmarch.SportScore.repository.EquipoRepository;
 import net.ausiasmarch.SportScore.repository.JugadorRepository;
@@ -27,6 +32,9 @@ public class PartidoService {
 
     @Autowired
     EquipoRepository oEquipoRepository;
+
+    @Autowired
+    EquipoService oEquipoService;
 
     @Autowired
     SessionService oSessionService;
@@ -82,16 +90,28 @@ public class PartidoService {
         return oPartidoRepository.findAll(oPageable).getContent().get(0);
     }
 
-    // Falta hacer esta función bien con el DataGenerator
+    private EquipoEntity getRandomTeam(List<EquipoEntity> equipos) {
+        Random random = new Random();
+        int index = random.nextInt(equipos.size());
+        return equipos.remove(index);
+    }
+
     @Transactional
     public Long populate(Integer amount) {
         oSessionService.onlyAdmins();
+        List<EquipoEntity> equipos = oEquipoService.getAll();
+
         for (int i = 0; i < amount; i++) {
-            /*
-             * oPartidoRepository
-             * .save(new PartidoEntity(DataGenerationHelper.getSpeech(1),
-             * oUserService.getOneRandom()));
-             */
+            LocalDate fechaPartido = DataGenerationHelper.generarFechaPartido();
+            String resultado = DataGenerationHelper.getRandomInt(0, 9) + "-" + DataGenerationHelper.getRandomInt(0, 9);
+
+            EquipoEntity equipoLocal = getRandomTeam(equipos);
+            EquipoEntity equipoVisitante = getRandomTeam(equipos);
+
+            oPartidoRepository.save(new PartidoEntity(fechaPartido, resultado, equipoLocal, equipoVisitante));
+
+            equipos.add(equipoLocal);
+            equipos.add(equipoVisitante);
         }
         return oPartidoRepository.count();
     }

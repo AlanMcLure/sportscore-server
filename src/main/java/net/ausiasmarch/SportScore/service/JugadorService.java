@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import net.ausiasmarch.SportScore.entity.EquipoEntity;
 import net.ausiasmarch.SportScore.entity.JugadorEntity;
 import net.ausiasmarch.SportScore.exception.ResourceNotFoundException;
+import net.ausiasmarch.SportScore.helper.DataGenerationHelper;
 //import net.ausiasmarch.SportScore.helper.DataGenerationHelper;
 import net.ausiasmarch.SportScore.repository.JugadorRepository;
 import net.ausiasmarch.SportScore.repository.EquipoRepository;
@@ -32,10 +33,19 @@ public class JugadorService {
     HttpServletRequest oHttpServletRequest;
 
     @Autowired
+    EquipoService oEquipoService;
+
+    @Autowired
     SessionService oSessionService;
 
     public JugadorEntity get(Long id) {
-        return oJugadorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Jugador not found"));
+        return oJugadorRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Jugador no encontrado"));
+    }
+
+    public JugadorEntity getByUsername(String username) {
+        return oJugadorRepository.findByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("Jugador no encontrado por username"));
     }
 
     public Page<JugadorEntity> getPage(Pageable oPageable, Long equipoId) {
@@ -61,12 +71,12 @@ public class JugadorService {
         JugadorEntity oJugadorEntityFromDatabase = this.get(oJugadorEntityToSet.getId());
         oSessionService.onlyAdminsOrUsersWithIsOwnData(oJugadorEntityFromDatabase.getId());
         if (oSessionService.isUser()) {
-            oJugadorEntityToSet.setId(null);
+            // oJugadorEntityToSet.setId(null);
             oJugadorEntityToSet.setRole(oJugadorEntityFromDatabase.getRole());
             oJugadorEntityToSet.setPassword(sportscorePASSWORD);
             return oJugadorRepository.save(oJugadorEntityToSet);
         } else {
-            oJugadorEntityToSet.setId(null);
+            // oJugadorEntityToSet.setId(null);
             oJugadorEntityToSet.setPassword(sportscorePASSWORD);
             return oJugadorRepository.save(oJugadorEntityToSet);
         }
@@ -85,24 +95,29 @@ public class JugadorService {
         return oJugadorRepository.findAll(oPageable).getContent().get(0);
     }
 
-    // Falta hacer esta función bien con el DataGenerator
     @Transactional
     public Long populate(Integer amount) {
         oSessionService.onlyAdmins();
         for (int i = 0; i < amount; i++) {
-            String nombre = "";
-            String apellido1 = "";
-            String apellido2 = "";
-
-            String nacionalidad = "";
-            String posicion = "";
-            LocalDate fechaNacimiento = LocalDate.of(2002, 10, 16);
-            ;
-            String email = "";
-            String password = "";
-            String username = "";
-            Boolean role = false;
-            EquipoEntity equipo;
+            String nombre = DataGenerationHelper.getRandomNombre();
+            String apellido1 = DataGenerationHelper.getRandomApellido();
+            String apellido2 = DataGenerationHelper.getRandomApellido();
+            String nacionalidad = DataGenerationHelper.generarNacionalidad();
+            String posicion = DataGenerationHelper.generarPosicion();
+            LocalDate fechaNacimiento = DataGenerationHelper.generarFechaNacimiento();
+            String email = DataGenerationHelper
+                    .doNormalizeString(
+                            nombre.substring(0, 3) + apellido1.substring(0, 3) + apellido2.substring(0, 2) + i)
+                    .toLowerCase()
+                    + "@gmail.com";
+            String username = DataGenerationHelper
+                    .doNormalizeString(
+                            nombre.substring(0, 3) + apellido1.substring(1, 3) + apellido2.substring(1, 2) + i)
+                    .toLowerCase();
+            oJugadorRepository.save(
+                    new JugadorEntity(nombre, apellido1, apellido2, nacionalidad, posicion, fechaNacimiento, email,
+                            username, "e2cac5c5f7e52ab03441bb70e89726ddbd1f6e5b683dde05fb65e0720290179e", false,
+                            oEquipoService.getOneRandom()));
         }
         return oEquipoRepository.count();
     }
@@ -113,13 +128,16 @@ public class JugadorService {
         oJugadorRepository.deleteAll();
         oJugadorRepository.resetAutoIncrement();
 
-        LocalDate fechaNacimiento = LocalDate.of(2002, 10, 16);
-        EquipoEntity equipo = oEquipoRepository.findById(1L)
-                .orElseThrow(() -> new ResourceNotFoundException("Equipo not found"));
-        JugadorEntity oJugadorEntity1 = new JugadorEntity(1L, "Alan", "McLure", "Alarcón", "España", "Delantero",
-                fechaNacimiento,
-                "pedropicapiedra@ausiasmarch.net", "pedropicapiedra", sportscorePASSWORD, true, equipo);
+        JugadorEntity oJugadorEntity1 = new JugadorEntity("Pedro", "Picapiedra", "Roca", "España", "Delantero",
+                DataGenerationHelper.generarFechaNacimiento(),
+                "pedropicapiedra@ausiasmarch.net", "pedropicapiedra", sportscorePASSWORD, false,
+                oEquipoService.getOneRandom());
         oJugadorRepository.save(oJugadorEntity1);
+        oJugadorEntity1 = new JugadorEntity("Pablo", "Mármol", "Granito", "España", "Defensa",
+                DataGenerationHelper.generarFechaNacimiento(), "pablomarmol@ausiasmarch.net",
+                "pablomarmol", sportscorePASSWORD, true, oEquipoService.getOneRandom());
+        oJugadorRepository.save(oJugadorEntity1);
+
         return oJugadorRepository.count();
     }
 

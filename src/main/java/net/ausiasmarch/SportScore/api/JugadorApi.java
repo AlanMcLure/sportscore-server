@@ -31,6 +31,11 @@ public class JugadorApi {
         return ResponseEntity.ok(oJugadorService.get(id));
     }
 
+    @GetMapping("/byUsername/{username}")
+    public ResponseEntity<JugadorEntity> get(@PathVariable("username") String username) {
+        return ResponseEntity.ok(oJugadorService.getByUsername(username));
+    }
+
     @PostMapping("")
     public ResponseEntity<Long> create(@RequestBody JugadorEntity oJugadorEntity) {
         return ResponseEntity.ok(oJugadorService.create(oJugadorEntity));
