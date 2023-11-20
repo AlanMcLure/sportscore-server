@@ -125,9 +125,10 @@ public class JugadorService {
     @Transactional
     public Long empty() {
         oSessionService.onlyAdmins();
-        oJugadorRepository.deleteAll();
+        oJugadorRepository.deleteAllByUserIdNot(oSessionService.getSessionUser().getId());
         oJugadorRepository.resetAutoIncrement();
 
+        /*
         JugadorEntity oJugadorEntity1 = new JugadorEntity("Pedro", "Picapiedra", "Roca", "España", "Delantero",
                 DataGenerationHelper.generarFechaNacimiento(),
                 "pedropicapiedra@ausiasmarch.net", "pedropicapiedra", sportscorePASSWORD, false,
@@ -137,7 +138,7 @@ public class JugadorService {
                 DataGenerationHelper.generarFechaNacimiento(), "pablomarmol@ausiasmarch.net",
                 "pablomarmol", sportscorePASSWORD, true, oEquipoService.getOneRandom());
         oJugadorRepository.save(oJugadorEntity1);
-
+        */
         return oJugadorRepository.count();
     }
 
