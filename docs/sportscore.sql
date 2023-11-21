@@ -28,7 +28,7 @@ CREATE TABLE jugador (
     password VARCHAR(255) NOT NULL,
     rol tinyint(1),
     equipo_id INT,
-    FOREIGN KEY (equipo_id) REFERENCES equipo(id) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (equipo_id) REFERENCES equipo(id) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 -- Crear la tabla Partido
