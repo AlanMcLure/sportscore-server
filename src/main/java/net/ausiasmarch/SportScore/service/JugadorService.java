@@ -116,7 +116,7 @@ public class JugadorService {
                     .toLowerCase();
             oJugadorRepository.save(
                     new JugadorEntity(nombre, apellido1, apellido2, nacionalidad, posicion, fechaNacimiento, email,
-                            username, "e2cac5c5f7e52ab03441bb70e89726ddbd1f6e5b683dde05fb65e0720290179e", false,
+                            username, "e2cac5c5f7e52ab03441bb70e89726ddbd1f6e5b683dde05fb65e0720290179e", true,
                             oEquipoService.getOneRandom()));
         }
         return oEquipoRepository.count();
@@ -129,16 +129,19 @@ public class JugadorService {
         oJugadorRepository.resetAutoIncrement();
 
         /*
-        JugadorEntity oJugadorEntity1 = new JugadorEntity("Pedro", "Picapiedra", "Roca", "España", "Delantero",
-                DataGenerationHelper.generarFechaNacimiento(),
-                "pedropicapiedra@ausiasmarch.net", "pedropicapiedra", sportscorePASSWORD, false,
-                oEquipoService.getOneRandom());
-        oJugadorRepository.save(oJugadorEntity1);
-        oJugadorEntity1 = new JugadorEntity("Pablo", "Mármol", "Granito", "España", "Defensa",
-                DataGenerationHelper.generarFechaNacimiento(), "pablomarmol@ausiasmarch.net",
-                "pablomarmol", sportscorePASSWORD, true, oEquipoService.getOneRandom());
-        oJugadorRepository.save(oJugadorEntity1);
-        */
+         * JugadorEntity oJugadorEntity1 = new JugadorEntity("Pedro", "Picapiedra",
+         * "Roca", "España", "Delantero",
+         * DataGenerationHelper.generarFechaNacimiento(),
+         * "pedropicapiedra@ausiasmarch.net", "pedropicapiedra", sportscorePASSWORD,
+         * false,
+         * oEquipoService.getOneRandom());
+         * oJugadorRepository.save(oJugadorEntity1);
+         * oJugadorEntity1 = new JugadorEntity("Pablo", "Mármol", "Granito", "España",
+         * "Defensa",
+         * DataGenerationHelper.generarFechaNacimiento(), "pablomarmol@ausiasmarch.net",
+         * "pablomarmol", sportscorePASSWORD, true, oEquipoService.getOneRandom());
+         * oJugadorRepository.save(oJugadorEntity1);
+         */
         return oJugadorRepository.count();
     }
 
