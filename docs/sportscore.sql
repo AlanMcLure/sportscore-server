@@ -76,4 +76,4 @@ INSERT INTO equipo (nombre, pais_origen, ciudad_origen, fecha_fundacion, entrena
 VALUES ('Sevilla FC', 'España', 'Sevilla', '1905-01-25', 'Diego Alonso');
 
 INSERT INTO `jugador` (`id`, `nombre`, `apellido_1`, `apellido_2`, `nacionalidad`, `posicion`, `fecha_nacimiento`, `email`, `username`, `password`, `rol`, `equipo_id`) VALUES (NULL, 'Pedro', 'Picapiedra', 'Roca', 'España', 'Delantero', '2002-10-16', 'pedropicapiedra@gmail.com', 'pedropicapiedra', 'e2cac5c5f7e52ab03441bb70e89726ddbd1f6e5b683dde05fb65e0720290179e', '0', '1');
-
+INSERT INTO `jugador` (`id`, `nombre`, `apellido_1`, `apellido_2`, `nacionalidad`, `posicion`, `fecha_nacimiento`, `email`, `username`, `password`, `rol`, `equipo_id`) VALUES (NULL, 'Pablo', 'Mármol', 'Granito', 'España', 'Defensa', '2002-11-28', 'pablomarmol@gmail.com', 'pablomarmol', 'e2cac5c5f7e52ab03441bb70e89726ddbd1f6e5b683dde05fb65e0720290179e', '1', '2');
